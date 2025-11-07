@@ -59,7 +59,7 @@ def decode(
         return _cache.decoded
     try:
         try:
-            decoded = custom_decode[encoding](encoded, size_limit)
+            decoded = custom_decode[encoding](encoded, size_limit)  # type: ignore
         except KeyError:
             decoded = codecs.decode(encoded, encoding, errors)  # type: ignore
         if encoding in ("gzip", "deflate", "deflateraw", "br", "zstd"):
@@ -117,7 +117,7 @@ def encode(
         return _cache.encoded
     try:
         try:
-            encoded = custom_encode[encoding](decoded)
+            encoded = custom_encode[encoding](decoded)  # type: ignore
         except KeyError:
             encoded = codecs.encode(decoded, encoding, errors)  # type: ignore
         if encoding in ("gzip", "deflate", "deflateraw", "br", "zstd"):
