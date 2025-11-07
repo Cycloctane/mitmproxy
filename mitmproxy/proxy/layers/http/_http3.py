@@ -253,6 +253,7 @@ class Http3Server(Http3Connection):
             timestamp_start=time.time(),
             timestamp_end=None,
         )
+        request.body_size_limit = self.context.options.body_size_limit
         return RequestHeaders(event.stream_id, request, end_stream=event.stream_ended)
 
 
@@ -300,6 +301,7 @@ class Http3Client(Http3Connection):
             timestamp_start=time.time(),
             timestamp_end=None,
         )
+        response.body_size_limit = self.context.options.body_size_limit
         return ResponseHeaders(event.stream_id, response, event.stream_ended)
 
 
