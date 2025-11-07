@@ -118,6 +118,7 @@ def test_zstd():
 def test_decoders_size_limit(encoder):
     test_content = b"a" * 1024
     compressed = encoding.encode(test_content, encoder)
+    encoding.encode(None, encoder)  # reset cache
     assert encoding.decode(compressed, encoder, size_limit=2048) == test_content
-    with pytest.raises(ValueError, match="Decompressed data exceeds size limit"):
+    with pytest.raises(ValueError, match="Decompressed data exceeds size_limit"):
         encoding.decode(compressed, encoder, size_limit=512)
